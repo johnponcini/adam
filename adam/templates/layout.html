@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Flask AJAX Demo</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <script type=text/javascript
+          src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        </script>
+        <script type=text/javascript>
+          var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/bootstrap.css') }}">        
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/style.css') }}"> 
+        <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='styles/css/select2.min.css') }}" >
+        <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='styles/css/jquery-confirm.min.css') }}" >
+        <link rel="stylesheet" type = "text/css" href="{{ url_for('static',filename='styles/css/keyboard.css') }}" >
+        <script src="{{ url_for('static',filename='styles/js/select2.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='styles/js/jquery-confirm.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='styles/js/jquery.keyboard.js') }}"></script>
+        <script defer src="{{ url_for('static',filename='styles/js/fontawesome-all.min.js') }}"></script>
+    </head>
+    <body>
+        <div class="background"></div>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

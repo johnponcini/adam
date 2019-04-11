@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML = 
+            h + ":" + m + ":" + s;
+    };
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i}; 
+        return i;
+    };
+    function upTime(countTo) {
+        now = new Date();
+        countTo = new Date(countTo);
+        diff = (now-countTo);
+
+        hours = Math.floor((diff%(60*60*1000*24))/(60*60*1000)*1);
+        mins = Math.floor(((diff%(60*60*1000*24))%(60*60*1000))/(60*1000)*1);
+        secs = Math.floor((((diff%(60*60*1000*24))%(60*60*1000))%(60*1000))/1000*1);
+
+        hours = checkTime(hours);
+        mins = checkTime(mins);
+        secs = checkTime(secs);
+
+        document.getElementById('test').innerHTML = 
+            hours + ":" + mins + ":" + secs;
+
+        clearTimeout(upTime.to);
+        upTime.to=setTimeout(function(){ upTime(countTo); },1000);
+    }
+</script>
+
+<body onload="startTime(); upTime(Date())">
+<h1 style="text-align: center;"><b style="color:#ecf5ff">RECORDING IN PROGRESS</b></h1>
+
+<div style="margin-top: 150px; width: 50%; left: 25%; right: 25%; color: #ecf5ff; position: fixed">
+<table style="width: 100%">
+<tr>
+<td>Started at:</td>
+<td><div id='txt' style="display: inline-block"></div>
+</td>
+<td rowspan="2" style="text-align: right;"><form style="display:inline" action="{{ url_for('stop_recording') }}" methods="GET"><button type="submit" name="btn" class="btn recbtn" value="stop">Stop</button></form></td>
+</tr>
+<td>Time elapsed:</td>
+<td><div id='test' style="display: inline-block"></div></td>
+</table>
+</div>
+<div style="float: right; margin-top:360px; right: 5%; position: fixed">
+</div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<body>
+    <div style="color: #B7C8C4; text-align: center; margin-top: 10%">
+        <h1>Oops! Something went wrong!</h1><br>
+        <i style="opacity: 0.7" class="fas fa-exclamation-triangle fa-10x"></i><br><br>
+        <h2>Please contact the sponsor immediately.</h2><br>
+        <h3>Support number: (209) 275-9809</h3>
+        <h3>Support backup: (415) 465-3511</h3>
+   </div>
+</body>
+
+{% endblock %}

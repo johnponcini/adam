@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <table cellspacing="30" style="color: white; margin-left:15%; margin-right:auto; width: 80%;" >
+        <tr>
+            {% if camera_num == 1 %}
+            <td width="35%"><b>Camera:<b></td>
+            <td width="65%" align="center" style="padding-top: 20px;">
+                    <video 
+                        id="video" 
+                        class="video-js vjs-default-skin vjs-big-play-centered" 
+                        controls preload=auto 
+                        controls ontimeupdate="getCurTime(this)"
+                        width=auto
+                        height=auto 
+                        style="align:center;">
+                        <source 
+                            src="{{ url_for('static',filename='tmp/webcam_'+t+'.webm') }}" 
+                            type="video/webm"/>
+                    </video>
+                {% elif camera_num == 2 %}
+                <td width="50%" align="center"><b>Camera 1<b>
+                    <video 
+                        id="video" 
+                        class="video-js vjs-default-skin vjs-big-play-centered" 
+                        controls preload=auto 
+                        controls ontimeupdate="getCurTime(this)"
+                        width=64
+                        height=64 
+                        style="align:center;">
+                        <source 
+                            src="http://127.0.0.1:8080/" 
+                            type="video/webm"/>   
+                    </video></td>  
+                    <td width="50%" align="center"><b>Camera 2<b>     
+                    <video 
+                        id="video" 
+                        class="video-js vjs-default-skin vjs-big-play-centered" 
+                        controls preload=auto 
+                        controls ontimeupdate="getCurTime(this)"
+                        width=64
+                        height=64 
+                        style="align:center;">
+                        <source 
+                            src="{{ url_for('static',filename='tmp/webcam_2_'+t+'.webm') }}" 
+                            type="video/webm"/>   
+                    </video></td> 
+                {% else %}
+                    <b style="color: orange;"> &#x26a0; Please check connection.<b/>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><b>Participant Microphone:<b></td>
+            <td width="65%" align="center" style="padding-top: 20px;">
+                {% if shotgun %}
+                    <audio controls>
+                        <source 
+                            src="{{ url_for('static',filename='tmp/shotgun_'+t+'.wav') }}"
+                            type="audio/wav"/>
+                    </audio>
+                {% else %}
+                    <b style="color: orange;"> &#x26a0; Please check connection.<b/>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><b>Omnidirectional Microphone:<b></td>
+            <td width="65%" align="center" style="padding-top: 20px;">
+                {% if omni %}
+                    <audio controls>
+                        <source 
+                            src="{{ url_for('static',filename='tmp/omni_'+t+'.wav') }}"
+                            type="audio/wav"/>
+                    </audio>
+                {% else %}
+                    <b style="color: orange;"> &#x26a0; Please check connection.<b/>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><b>Lapel Microphone 1:<b></td>
+            <td width="65%" align="center" style="padding-top: 20px;">
+                {% if lapel_1 %}
+                    <audio controls>
+                        <source 
+                            src="{{ url_for('static',filename='tmp/lapel_1_'+t+'.wav') }}"
+                            type="audio/wav"/>
+                    </audio>
+                {% else %}
+                    <b style="color: orange;"> &#x26a0; Please check connection.<b/>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><b>Lapel Microphone 2:<b></td>
+            <td width="65%" align="center" style="padding-top: 20px;">
+                {% if lapel_2 %}
+                    <audio controls>
+                        <source 
+                            src="{{ url_for('static',filename='tmp/lapel_2_'+t+'.wav') }}"
+                            type="audio/wav"/>
+                    </audio>
+                {% else %}
+                    <b style="color: orange;"> &#x26a0; Please check connection.<b/>
+                {% endif %}
+            </td>
+        </tr>
+     </table>
+     <div style="margin-top: 30px">
+     <form style="display:inline; margin-left: 500px;" action="{{ url_for('start') }}" methods="GET">
+        <button type="submit" name="btn" class="btn recbtn" value="back">Back</button>
+        <button type="submit" name="btn" class="btn recbtn" value="test">Retest</button>
+        <button type="submit" name="btn" class="btn recbtn" value="start">Start</button>
+     </form>
+     </div>
+{% endblock %}
